@@ -20,9 +20,6 @@ public class UserService implements UserDetailsService {
     private final PasswordEncoder encoder;
     private final JWTHelper jwt;
 
-    /**
-     * REGISTER
-     */
     public void register(RegisterRequest req) {
         if (userRepo.existsByEmail(req.getEmail())) {
             throw new RuntimeException("Email already exists.");
@@ -36,28 +33,19 @@ public class UserService implements UserDetailsService {
         userRepo.save(user);
     }
 
-    /**
-     * LOGIN -> Return JWT Token
-     */
     public String login(LoginRequest req) {
         UserEntity user = userRepo.findByEmail(req.getEmail())
                 .orElseThrow(() -> new RuntimeException("Invalid credentials"));
 
-        boolean valid = encoder.matches(req.getPassword(), user.getPassword());
-
-        if (!valid) {
+        if (!encoder.matches(req.getPassword(), user.getPassword())) {
             throw new RuntimeException("Invalid credentials");
         }
 
         return jwt.generateToken(user.getEmail());
     }
 
-    /**
-     * REQUIRED BY SPRING SECURITY
-     */
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-
         UserEntity user = userRepo.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
@@ -66,5 +54,11 @@ public class UserService implements UserDetailsService {
                 .password(user.getPassword())
                 .authorities("USER")
                 .build();
+    }
+
+    // ⭐ REQUIRED FOR SUPPORTING @AuthenticationPrincipal
+    public UserEntity getUserByEmail(String email) {
+        return userRepo.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 }

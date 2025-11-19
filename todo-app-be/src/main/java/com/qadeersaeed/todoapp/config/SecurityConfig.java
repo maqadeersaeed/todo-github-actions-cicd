@@ -4,6 +4,7 @@ import com.qadeersaeed.todoapp.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -17,12 +18,20 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
-@RequiredArgsConstructor
 public class SecurityConfig {
 
     private final JWTFilter jwtFilter;
     private final UserService userService;
     private final CustomAuthEntryPoint authEntryPoint;
+
+    public SecurityConfig(@Lazy JWTFilter jwtFilter,
+                          @Lazy UserService userService,
+                          CustomAuthEntryPoint entryPoint) {
+        this.jwtFilter = jwtFilter;
+        this.userService = userService;
+        this.authEntryPoint = entryPoint;
+    }
+
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
