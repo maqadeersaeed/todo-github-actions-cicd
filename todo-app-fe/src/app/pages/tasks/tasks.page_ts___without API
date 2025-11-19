@@ -1,0 +1,69 @@
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+
+import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+import { ListboxModule } from 'primeng/listbox';
+import { CardModule } from 'primeng/card';
+import { CheckboxModule } from 'primeng/checkbox';
+import { DividerModule } from 'primeng/divider';
+import { MessageService } from 'primeng/api';
+import { TaskService } from '../../services/task.service';
+import { ThemeService } from '../../services/theme.service';
+import { AuthService } from '../../services/auth.service';
+
+@Component({
+  selector: 'app-tasks',
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    InputTextModule,
+    ButtonModule,
+    ListboxModule,
+    CardModule,
+    CheckboxModule,
+    DividerModule
+  ],
+  templateUrl: './tasks.page.html',
+  styleUrls: ['./tasks.page.scss'],
+})
+export class TasksPage {
+
+  form!: FormGroup;
+  tasks$; // <-- declare only
+
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private message: MessageService,
+    private taskService: TaskService,
+    private theme: ThemeService,
+  ) {
+    this.form = this.fb.group({
+      task: ['', Validators.required]
+    });
+
+    // ✔ initialize here (strict mode safe)
+    this.tasks$ = this.taskService.tasks$;
+  }
+
+  addTask() {
+    if (this.form.invalid) return;
+    this.taskService.addTask(this.form.value.task!);
+    this.form.reset();
+  }
+
+  toggleTask(i: number) {
+    this.taskService.toggleTask(i);
+  }
+
+  deleteTask(i: number) {
+    this.taskService.deleteTask(i);
+  }
+
+}

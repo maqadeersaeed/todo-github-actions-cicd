@@ -1,0 +1,33 @@
+###############################################
+# Node SSR + NGINX Reverse Proxy
+###############################################
+
+version: "3.9"
+
+services:
+  ssr:
+    container_name: todo-ssr
+    build:
+      context: .
+      dockerfile: Dockerfile.ssr
+    ports:
+      - "4000:4000"
+    networks:
+      - webnet
+
+  nginx:
+    container_name: todo-nginx
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - ssr
+    networks:
+      - webnet
+
+networks:
+  webnet:
+    driver: bridge

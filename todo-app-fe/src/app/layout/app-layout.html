@@ -1,0 +1,29 @@
+<div class="min-h-screen bg-surface-0 dark:bg-surface-900">
+
+  <!-- Global Header -->
+  <header class="bg-surface-50 dark:bg-surface-800 shadow p-4 flex justify-between items-center">
+    <h1 class="text-xl font-semibold">TODO App</h1>
+
+    <div class="flex gap-2">
+      <button
+        pButton
+        icon="pi pi-moon"
+        class="p-button-rounded p-button-text"
+        (click)="toggleTheme()">
+      </button>
+      <button
+          pButton
+          icon="pi pi-sign-out"
+          class="p-button-danger"
+          (click)="logout()">
+        </button>  
+    </div>
+    
+  </header>
+
+  <!-- Page Content -->
+  <main class="p-4">
+    <router-outlet></router-outlet>
+  </main>
+
+</div>

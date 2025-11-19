@@ -1,0 +1,58 @@
+<div class="min-h-screen bg-surface-0 dark:bg-surface-900 p-4 max-w-2xl mx-auto">
+
+  <!-- Header -->
+  <div class="flex justify-between items-center mb-6">
+    <h2 class="text-xl font-semibold">My Tasks</h2>
+
+    <div class="flex gap-2">
+      
+    </div>
+  </div>
+
+  <!-- Add Task Card -->
+  <div class="p-4 rounded-xl shadow bg-surface-50 dark:bg-surface-800 mb-6">
+    <form [formGroup]="form" (ngSubmit)="addTask()" class="flex gap-3">
+      <input
+        pInputText
+        type="text"
+        placeholder="Add a new task..."
+        formControlName="task"
+        class="w-full"
+      />
+
+      <button pButton icon="pi pi-plus" type="submit"></button>
+    </form>
+  </div>
+
+  <!-- Task List -->
+  <div class="flex flex-col gap-3">
+    <div
+      *ngFor="let t of tasks; index as i"
+      class="p-4 rounded-xl shadow bg-surface-50 dark:bg-surface-800 flex justify-between items-center">
+
+      <div class="flex items-center gap-3">
+        <p-checkbox
+          [binary]="true"
+          [ngModel]="t.completed"
+          (ngModelChange)="toggleTask(i)">
+        </p-checkbox>
+
+        <span
+          class="text-base"
+          [class.line-through]="t.completed"
+          [class.opacity-60]="t.completed">
+          {{ t.title }}
+        </span>
+      </div>
+
+      <button
+        pButton
+        icon="pi pi-trash"
+        class="p-button-text p-button-danger"
+        (click)="deleteTask(i)">
+      </button>
+
+    </div>
+  </div>
+
+</div>

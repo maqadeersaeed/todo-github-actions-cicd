@@ -1,0 +1,47 @@
+<div class="min-h-screen flex items-center justify-center px-4 bg-surface-0 dark:bg-surface-900">
+
+  <div class="w-full max-w-md bg-surface-50 dark:bg-surface-800 p-8 rounded-2xl shadow">
+
+    <h2 class="text-center text-2xl font-semibold mb-2">Welcome Back</h2>
+    <p class="text-center text-sm mb-6 text-surface-500">
+      Login to your TODO app
+    </p>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" class="flex flex-col gap-4">
+
+      <!-- Email Field -->
+      <div class="flex flex-col gap-1">
+        <label class="text-sm font-medium">Email</label>
+        <input
+          pInputText
+          type="email"
+          formControlName="email"
+          class="w-full"
+        />
+      </div>
+
+      <!-- Password Field -->
+      <div class="flex flex-col gap-1">
+        <label class="text-sm font-medium">Password</label>
+        <p-password
+          formControlName="password"
+          class="w-full"
+          [toggleMask]="true">
+        </p-password>
+      </div>
+
+      <!-- Login Button -->
+      <button
+        pButton
+        type="submit"
+        label="Login"
+        class="w-full mt-2">
+      </button>
+    </form>
+
+    <p class="text-center text-sm mt-4">
+      Don't have an account?
+      <a routerLink="/register" class="text-primary font-medium">Register</a>
+    </p>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+@import "tailwindcss";
+@import "primeicons/primeicons.css";
+
+/* Enable dark mode by toggling .dark-theme on <body> */
+@custom-variant dark (&:where(.dark-theme, .dark-theme *));
+
+body {
+  font-family: var(--p-font-family);
+}

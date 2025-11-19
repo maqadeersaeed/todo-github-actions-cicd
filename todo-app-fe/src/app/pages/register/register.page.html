@@ -1,0 +1,67 @@
+<div class="min-h-screen flex items-center justify-center px-4 bg-surface-0 dark:bg-surface-900">
+
+  <div class="w-full max-w-md bg-surface-50 dark:bg-surface-800 p-8 rounded-2xl shadow">
+
+    <h2 class="text-center text-2xl font-semibold mb-2">Create Account</h2>
+    <p class="text-center text-sm mb-6 text-surface-500">
+      Register to access your TODO app
+    </p>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" class="flex flex-col gap-4">
+
+      <!-- Name Field -->
+      <div class="flex flex-col gap-1">
+        <label class="text-sm font-medium">Name</label>
+        <input
+          pInputText
+          formControlName="name"
+          class="w-full"
+        />
+      </div>
+
+      <!-- Email Field -->
+      <div class="flex flex-col gap-1">
+        <label class="text-sm font-medium">Email</label>
+        <input
+          pInputText
+          type="email"
+          formControlName="email"
+          class="w-full"
+        />
+      </div>
+
+      <!-- Password Field -->
+      <div class="flex flex-col gap-1">
+        <label class="text-sm font-medium">Password</label>
+        <p-password
+          formControlName="password"
+          class="w-full"
+          [toggleMask]="true">
+        </p-password>
+      </div>
+
+      <!-- Confirm Password Field -->
+      <div class="flex flex-col gap-1">
+        <label class="text-sm font-medium">Confirm Password</label>
+        <p-password
+          formControlName="confirmPassword"
+          class="w-full"
+          [toggleMask]="true">
+        </p-password>
+      </div>
+
+      <!-- Submit Button -->
+      <button
+        pButton
+        type="submit"
+        label="Register"
+        class="w-full mt-2">
+      </button>
+    </form>
+
+    <p class="text-center text-sm mt-4">
+      Already have an account?
+      <a routerLink="/login" class="text-primary font-medium">Login</a>
+    </p>
+  </div>
+</div>

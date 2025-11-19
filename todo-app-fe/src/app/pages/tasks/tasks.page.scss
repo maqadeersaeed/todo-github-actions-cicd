@@ -1,0 +1,14 @@
+.page-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.completed {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.header button {
+  border-radius: 50%;
+}
