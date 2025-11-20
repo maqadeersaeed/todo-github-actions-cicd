@@ -10,12 +10,17 @@ on:
       - docker/frontend/**
       - 'docker-compose.yml'
       - .github/workflows/*-frontend.yml
+
 jobs:
   build-image:
-    name: Build FE Docker image
-    runs-on: self-hosted
+
+    runs-on: ubuntu-latest
+    environment: prod   # <- This tells GitHub to use PRODUCTION secrets
+
+    name: Build FE Docker Image
+
     steps:
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0

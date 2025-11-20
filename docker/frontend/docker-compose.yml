@@ -9,7 +9,7 @@ services:
     container_name: todo-ssr
     build:
       context: .
-      dockerfile: Dockerfile.ssr
+      dockerfile: ssr-config-for-reference-only-not-tested-yet/Dockerfile.ssr
     ports:
       - "4000:4000"
     networks:
@@ -19,7 +19,7 @@ services:
     container_name: todo-nginx
     build:
       context: .
-      dockerfile: Dockerfile.nginx
+      dockerfile: ssr-config-for-reference-only-not-tested-yet/Dockerfile.nginx
     ports:
       - "80:80"
       - "443:443"

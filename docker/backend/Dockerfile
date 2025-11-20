@@ -36,7 +36,10 @@ COPY --from=build /app/target/*.jar app.jar
 # ENV VARIABLES
 # ================
 ENV ACTIVE_PROFILE=${PROFILE}
-ENV DB_URL=jdbc:postgresql://postgres:5432/todo_db
+#ENV DB_URL=jdbc:postgresql://localhost:5432/tododb
+ENV DB_URL=jdbc:postgresql://host.docker.internal:5432/tododb
+ENV DB_USER=postgres
+ENV DB_PWD=1234
 ENV JAR_NAME=app.jar
 
 

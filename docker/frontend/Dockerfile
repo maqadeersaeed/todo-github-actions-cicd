@@ -16,6 +16,7 @@ COPY . .
 
 # Angular 17+ builds to /dist/<app-name>/browser
 RUN #npm run build --omit=dev # Prod Optimized
+RUN #npm run build --prod
 RUN npm run build # Dev
 
 # Build SSR (browser + server) ::: If App supports Client and Server Both
@@ -47,7 +48,7 @@ RUN npm run build # Dev
 # 🚀 Runtime Stage — Latest NGINX Alpine
 # Use This Stage if Angular Applicatio want to Run as Client Side. It doesnt Support SSR Based Angular Project.
 ###############################################
-FROM nginx:alpine AS production-stage-Client
+FROM nginx:alpine AS production-stage-client
 
 # Remove default nginx page
 RUN rm -rf /usr/share/nginx/html/*
